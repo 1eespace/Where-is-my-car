@@ -83,11 +83,11 @@ $('memo').addEventListener('input', (e) => {
 $('bPrimary').addEventListener('click', () => {
   if (state.savedAt) {
     resetAll();
-    toast("You're out: drive safe");
+    toast('Drive Safe :)');
     return;
   }
   if (!state.floor && !state.zone && !state.memo && !state.photo) {
-    toast('Add a spot or photo first');
+    toast('Add your spot first');
     return;
   }
   state.savedAt = Date.now();
