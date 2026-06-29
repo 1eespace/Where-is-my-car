@@ -287,13 +287,6 @@ button.act:active {
   padding: 17px;
 }
 
-.b-img {
-  background: var(--asphalt-2);
-  color: var(--concrete);
-  border: 1px solid var(--edge);
-  grid-column: 1 / -1;
-}
-
 .b-left {
   background: var(--asphalt-2);
   color: var(--concrete);
