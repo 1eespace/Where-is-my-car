@@ -54,7 +54,11 @@ function render() {
   $('statusText').textContent = parked ? 'Parked' : 'Empty';
   $('when').textContent = parked ? fmt(state.savedAt) : '—';
   $('bPrimary').textContent = parked ? 'Left' : 'I parked here';
-  $('bClear').disabled = parked;
+  updateClear();
+}
+function updateClear() {
+  const empty = !state.floor && !state.zone && !state.memo && !state.photo;
+  $('bClear').disabled = !!state.savedAt || empty;
 }
 function autoGrow(el) {
   el.style.height = 'auto';
@@ -66,12 +70,14 @@ function autoGrow(el) {
     state[id] = e.target.value.toUpperCase();
     e.target.value = state[id];
     persist();
+    updateClear();
   }),
 );
 $('memo').addEventListener('input', (e) => {
   state.memo = e.target.value;
   autoGrow(e.target);
   persist();
+  updateClear();
 });
 
 $('bPrimary').addEventListener('click', () => {
