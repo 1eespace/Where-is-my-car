@@ -252,8 +252,9 @@ header .sub {
 
 /* buttons */
 .actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 10px;
   margin-top: 18px;
 }
@@ -279,19 +280,21 @@ button.act:active {
   transform: scale(0.97);
 }
 
+button.act:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+button.act:disabled:active {
+  transform: none;
+}
+
 .b-save {
   background: var(--line);
   color: #231c00;
-  grid-column: 1 / -1;
+  width: 100%;
   font-size: 16px;
   padding: 17px;
-}
-
-.b-left {
-  background: var(--asphalt-2);
-  color: var(--concrete);
-  border: 1px solid var(--edge);
-  font-size: 14px;
 }
 
 .b-clear {
@@ -300,6 +303,7 @@ button.act:active {
   border: 1px solid var(--edge);
   font-weight: 600;
   font-size: 14px;
+  padding: 13px 36px;
 }
 
 .b-clear:active {

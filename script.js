@@ -53,6 +53,8 @@ function render() {
   $('status').classList.toggle('on', parked);
   $('statusText').textContent = parked ? 'Parked' : 'Empty';
   $('when').textContent = parked ? fmt(state.savedAt) : '—';
+  $('bPrimary').textContent = parked ? 'Left' : 'I parked here';
+  $('bClear').disabled = parked;
 }
 function autoGrow(el) {
   el.style.height = 'auto';
@@ -72,7 +74,12 @@ $('memo').addEventListener('input', (e) => {
   persist();
 });
 
-$('bSave').addEventListener('click', () => {
+$('bPrimary').addEventListener('click', () => {
+  if (state.savedAt) {
+    resetAll();
+    toast("You're out: drive safe");
+    return;
+  }
   if (!state.floor && !state.zone && !state.memo && !state.photo) {
     toast('Add a spot or photo first');
     return;
@@ -124,14 +131,6 @@ function resetAll() {
   persist();
   render();
 }
-$('bLeft').addEventListener('click', () => {
-  if (!state.savedAt && !state.floor && !state.zone && !state.photo) {
-    toast('Nothing parked right now');
-    return;
-  }
-  resetAll();
-  toast("You're out: drive safe");
-});
 $('bClear').addEventListener('click', () => {
   if (!confirm('Clear everything and start a new spot?')) return;
   resetAll();
